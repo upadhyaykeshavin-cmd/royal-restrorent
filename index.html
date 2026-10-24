@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>La Tavola | Restaurant</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+        /* RESET */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #b84c32;
+            --dark: #20251f;
+            --cream: #faf7f0;
+            --text: #62665e;
+            --white: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .container {
+            width: min(1150px, 90%);
+            margin: auto;
+        }
+
+        .section {
+            padding: 90px 0;
+        }
+
+        .section-label {
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: clamp(32px, 4vw, 48px);
+            margin-bottom: 20px;
+        }
+
+        .section-description {
+            color: var(--text);
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: 0.3s;
+            cursor: pointer;
+            border: 1px solid var(--primary);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #923a25;
+            border-color: #923a25;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            color: var(--dark);
+            border-color: #d6d1c7;
+        }
+
+        .btn-outline:hover {
+            background: var(--dark);
+            color: white;
+        }
+
+        /* NAVBAR */
+        header {
+            background: var(--cream);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #eae5dc;
+        }
+
+        .navbar {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 27px;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 27px;
+            cursor: pointer;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 650px;
+            display: flex;
+            align-items: center;
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(20, 25, 20, 0.88) 0%,
+                    rgba(20, 25, 20, 0.58) 48%,
+                    rgba(20, 25, 20, 0.08) 100%
+                ),
+                url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1800&q=85')
+                center/cover no-repeat;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 650px;
+            padding: 90px 0;
+        }
+
+        .hero .section-label {
+            color: #f3b59f;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 6vw, 76px);
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #f3b59f;
+        }
+
+        .hero p {
+            color: #f1eee8;
+            font-size: 17px;
+            max-width: 500px;
+            margin-bottom: 32px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .hero .btn-outline {
+            color: white;
+            border-color: rgba(255,255,255,0.6);
+        }
+
+        .hero .btn-outline:hover {
+            background: white;
+            color: var(--dark);
+        }
+
+        /* FEATURES */
+        .features {
+            background: white;
+            padding: 35px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            text-align: center;
+        }
+
+        .feature-item {
+            padding: 10px;
+        }
+
+        .feature-item .icon {
+            font-size: 27px;
+            margin-bottom: 10px;
+        }
+
+        .feature-item h3 {
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+
+        .feature-item p {
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        /* ABOUT */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 70px;
+        }
+
+        .about-image {
+            height: 500px;
+            border-radius: 8px;
+        }
+
+        .about-text p {
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .about-text .btn {
+            margin-top: 10px;
+        }
+
+        /* MENU */
+        .menu-section {
+            background: #f1ece2;
+            text-align: center;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 45px;
+            text-align: left;
+        }
+
+        .menu-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        .menu-card img {
+            height: 230px;
+        }
+
+        .menu-card-content {
+            padding: 23px;
+        }
+
+        .menu-card h3 {
+            font-size: 23px;
+            margin-bottom: 10px;
+        }
+
+        .menu-card p {
+            color: var(--text);
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .menu-price {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 19px;
+        }
+
+        .menu-bottom {
+            margin-top: 40px;
+        }
+
+        /* TESTIMONIAL */
+        .testimonial {
+            text-align: center;
+        }
+
+        .stars {
+            color: #d79b32;
+            font-size: 23px;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial blockquote {
+            max-width: 750px;
+            margin: 0 auto 25px;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(22px, 3vw, 31px);
+            line-height: 1.5;
+        }
+
+        .customer-name {
+            font-weight: 700;
+        }
+
+        .customer-label {
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        /* RESERVATION */
+        .reservation {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+        }
+
+        .reservation p {
+            color: #d0d1ca;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .reservation .section-label {
+            color: #f3b59f;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #171b17;
+            color: white;
+            padding: 55px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 40px;
+        }
+
+        .footer-grid h3 {
+            font-size: 21px;
+            margin-bottom: 18px;
+        }
+
+        .footer-grid p,
+        .footer-grid a {
+            color: #c3c7bf;
+            font-size: 14px;
+        }
+
+        .footer-grid p {
+            margin-bottom: 10px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a:hover {
+            color: #f3b59f;
+        }
+
+        .copyright {
+            border-top: 1px solid #343a33;
+            padding-top: 20px;
+            text-align: center;
+            color: #aeb3aa;
+            font-size: 13px;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 850px) {
+            .nav-links {
+                gap: 16px;
+            }
+
+            .navbar > .btn {
+                display: none;
+            }
+
+            .about-grid {
+                gap: 35px;
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-image {
+                height: 430px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .section {
+                padding: 65px 0;
+            }
+
+            .navbar {
+                height: 70px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: var(--cream);
+                padding: 22px 5%;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+                border-bottom: 1px solid #eae5dc;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero {
+                min-height: 580px;
+                background-position: 60% center;
+            }
+
+            .hero-content {
+                padding: 65px 0;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                height: 330px;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-card img {
+                height: 240px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header>
+        <nav class="navbar container">
+            <a href="#home" class="logo">La <span>Tavola.</span></a>
+
+            <button class="menu-toggle"
+                    id="menuToggle"
+                    aria-label="Open navigation"
+                    aria-expanded="false">
+                ☰
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#menu">Our Menu</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <a href="#reservation" class="btn btn-primary">
+                Book a Table
+            </a>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- HERO SECTION -->
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="section-label">
+                        Welcome to La Tavola
+                    </div>
+
+                    <h1>
+                        Good Food.<br>
+                        Great <span>Memories.</span>
+                    </h1>
+
+                    <p>
+                        Experience the perfect blend of fresh ingredients,
+                        authentic flavors, and warm hospitality.
+                        Every meal tells a story.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="#menu" class="btn btn-primary">
+                            Explore Our Menu
+                        </a>
+
+                        <a href="#about" class="btn btn-outline">
+                            Discover Our Story
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES -->
+        <section class="features">
+            <div class="container features-grid">
+
+                <div class="feature-item">
+                    <div class="icon">🥗</div>
+                    <h3>Fresh Ingredients</h3>
+                    <p>Fresh, quality ingredients in every dish.</p>
+                </div>
+
+                <div class="feature-item">
+                    <div class="icon">👨‍🍳</div>
+                    <h3>Expert Chefs</h3>
+                    <p>Beautifully prepared meals made with care.</p>
+                </div>
+
+                <div class="feature-item">
+                    <div class="icon">🕯️</div>
+                    <h3>Cozy Atmosphere</h3>
+                    <p>A welcoming space for every occasion.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section class="section" id="about">
+            <div class="container about-grid">
+
+                <img
+                    class="about-image"
+                    src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=85"
+                    alt="Elegant restaurant dining experience"
+                    loading="lazy"
+                >
+
+                <div class="about-text">
+                    <div class="section-label">Our Story</div>
+
+                    <h2>More Than Just a Meal</h2>
+
+                    <p>
+                        At La Tavola, we believe great food brings
+                        people together. Our restaurant combines
+                        carefully selected ingredients with a passion
+                        for creating unforgettable dining experiences.
+                    </p>
+
+                    <p>
+                        Whether you're celebrating a special occasion
+                        or enjoying a casual dinner, we're here to make
+                        every visit feel special.
+                    </p>
+
+                    <a href="#reservation" class="btn btn-primary">
+                        Visit Our Restaurant
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- MENU SECTION -->
+        <section class="section menu-section" id="menu">
+            <div class="container">
+
+                <div class="section-label">Taste the Difference</div>
+
+                <h2>Our Popular Dishes</h2>
+
+                <p class="section-description">
+                    Discover some of our favorite dishes, prepared
+                    with fresh ingredients and a whole lot of love.
+                </p>
+
+                <div class="menu-grid">
+
+                    <article class="menu-card">
+                        <img
+                            src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=700&q=85"
+                            alt="Fresh pasta dish"
+                            loading="lazy"
+                        >
+
+                        <div class="menu-card-content">
+                            <h3>Italian Pasta</h3>
+
+                            <p>
+                                Delicious pasta with a rich sauce,
+                                fresh herbs, and Parmesan.
+                            </p>
+
+                            <div class="menu-price">₹349</div>
+                        </div>
+                    </article>
+
+                    <article class="menu-card">
+                        <img
+                            src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=700&q=85"
+                            alt="Freshly baked pizza"
+                            loading="lazy"
+                        >
+
+                        <div class="menu-card-content">
+                            <h3>Classic Pizza</h3>
+
+                            <p>
+                                A crisp crust topped with cheese,
+                                tomato, and delicious seasonings.
+                            </p>
+
+                            <div class="menu-price">₹399</div>
+                        </div>
+                    </article>
+
+                    <article class="menu-card">
+                        <img
+                            src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=700&q=85"
+                            alt="Fresh and colorful salad"
+                            loading="lazy"
+                        >
+
+                        <div class="menu-card-content">
+                            <h3>Garden Salad</h3>
+
+                            <p>
+                                A refreshing mix of seasonal greens,
+                                vegetables, and house dressing.
+                            </p>
+
+                            <div class="menu-price">₹249</div>
+                        </div>
+                    </article>
+
+                </div>
+
+                <div class="menu-bottom">
+                    <a href="#reservation" class="btn btn-primary">
+                        Reserve Your Table
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CUSTOMER REVIEW -->
+        <section class="section testimonial" id="reviews">
+            <div class="container">
+
+                <div class="section-label">Guest Experiences</div>
+
+                <h2>What Our Guests Say</h2>
+
+                <div class="stars" aria-label="5 out of 5 stars">
+                    ★★★★★
+                </div>
+
+                <blockquote>
+                    "Amazing food, beautiful atmosphere, and wonderful
+                    service. It's the kind of place you want to visit
+                    again and again!"
+                </blockquote>
+
+                <div class="customer-name">A Happy Guest</div>
+
+                <div class="customer-label">
+                    Restaurant visitor
+                </div>
+
+            </div>
+        </section>
+
+        <!-- RESERVATION -->
+        <section class="section reservation" id="reservation">
+            <div class="container">
+
+                <div class="section-label">Your Table Awaits</div>
+
+                <h2>Make Your Evening Special</h2>
+
+                <p>
+                    Planning a dinner date, family gathering, or special
+                    celebration? Get in touch with us to arrange your visit.
+                </p>
+
+                <a
+                    href="mailto:reservations@example.com?subject=Restaurant%20Table%20Reservation"
+                    class="btn btn-primary"
+                >
+                    Request a Reservation
+                </a>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div>
+                    <a href="#home" class="logo">
+                        La <span>Tavola.</span>
+                    </a>
+
+                    <p style="margin-top: 18px;">
+                        Great food, warm hospitality, and memorable
+                        moments. We look forward to welcoming you.
+                    </p>
+                </div>
+
+                <div>
+                    <h3>Quick Links</h3>
+
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#menu">Our Menu</a></li>
+                        <li><a href="#reservation">Reservations</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3>Contact Us</h3>
+
+                    <p>📍 Your Restaurant Address</p>
+                    <p>📞 +91 98765 43210</p>
+                    <p>✉️ hello@example.com</p>
+                    <p>🕒 Daily: 12 PM – 11 PM</p>
+                </div>
+
+            </div>
+
+            <div class="copyright">
+                © <span id="year"></span> La Tavola Restaurant.
+                All rights reserved.
+            </div>
+
+        </div>
+    </footer>
+
+    <script>
+        // Mobile navigation toggle
+        const menuToggle = document.getElementById("menuToggle");
+        const navLinks = document.getElementById("navLinks");
+
+        menuToggle.addEventListener("click", function () {
+            const isOpen = navLinks.classList.toggle("active");
+
+            menuToggle.setAttribute("aria-expanded", isOpen);
+            menuToggle.setAttribute(
+                "aria-label",
+                isOpen ? "Close navigation" : "Open navigation"
+            );
+
+            menuToggle.textContent = isOpen ? "✕" : "☰";
+        });
+
+        // Close mobile menu when a navigation link is clicked
+        document.querySelectorAll("#navLinks a").forEach(function (link) {
+            link.addEventListener("click", function () {
+                navLinks.classList.remove("active");
+                menuToggle.setAttribute("aria-expanded", "false");
+                menuToggle.setAttribute("aria-label", "Open navigation");
+                menuToggle.textContent = "☰";
+            });
+        });
+
+        // Automatically update copyright year
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+    </script>
+
+</body>
+</html>
